@@ -1,14 +1,14 @@
 @echo off
-echo Checking Python 3 installation...
+echo Checking Python installation...
 
-REM Check for Python 3 using version info
-python --version 2>nul | findstr "Python 3" >nul
-if %errorlevel% neq 0 (
-    python3 --version 2>nul | findstr "Python 3" >nul
-    if %errorlevel% neq 0 (
-        echo Python 3 not found. Please install Python 3.
+REM Check for Python 3
+python --version >nul 2>&1
+if %ERRORLEVEL% NEQ 0 (
+    python3 --version >nul 2>&1
+    if %ERRORLEVEL% NEQ 0 (
+        echo Python 3 is not installed. Please install Python 3.
         pause
-        exit /b
+        exit /b 1
     ) else (
         set PYTHON=python3
     )
@@ -16,7 +16,16 @@ if %errorlevel% neq 0 (
     set PYTHON=python
 )
 
-echo Running test distribution...
-%PYTHON% distribute.py
+REM Check if virtual environment exists
+if not exist "venv\Scripts\activate.bat" (
+    echo Creating virtual environment...
+    %PYTHON% -m venv venv
+)
+
+REM Activate virtual environment
+call venv\Scripts\activate.bat
+
+echo Running distribute.py...
+python distribute.py
 
 pause
