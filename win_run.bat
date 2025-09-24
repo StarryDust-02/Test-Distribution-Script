@@ -1,14 +1,22 @@
 @echo off
+echo Checking Python 3 installation...
 
-echo Checking Python installation...
-python --version
+REM Check for Python 3 using version info
+python --version 2>nul | findstr "Python 3" >nul
 if %errorlevel% neq 0 (
-    echo Python not found. Please install Python from the Microsoft Store.
-    pause
-    exit /b
+    python3 --version 2>nul | findstr "Python 3" >nul
+    if %errorlevel% neq 0 (
+        echo Python 3 not found. Please install Python 3.
+        pause
+        exit /b
+    ) else (
+        set PYTHON=python3
+    )
+) else (
+    set PYTHON=python
 )
 
 echo Running test distribution...
-python distribute.py
+%PYTHON% distribute.py
 
 pause
