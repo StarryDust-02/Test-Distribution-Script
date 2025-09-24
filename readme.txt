@@ -94,8 +94,10 @@ Error Handling
   print a warning but continue processing other students.
 - Existing files in `output/` may be overwritten.
 
+
 License
 -------
 This project is currently released under the MIT License.
 A custom EULA may be introduced in future versions if the project is packaged
 as a standalone application.
+
