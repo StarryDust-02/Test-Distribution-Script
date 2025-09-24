@@ -96,5 +96,6 @@ Error Handling
 
 License
 -------
-This project is free to use, modify, and distribute.
-
+This project is currently released under the MIT License.
+A custom EULA may be introduced in future versions if the project is packaged
+as a standalone application.
